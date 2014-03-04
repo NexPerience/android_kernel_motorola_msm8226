@@ -37,7 +37,7 @@ FONTC	= $(srctree)/drivers/video/console/font_acorn_8x8.c
 # string library code (-Os is enforced to keep it much smaller)
 OBJS		+= string.o
 CFLAGS_string.o	:= -Os
-
+# For __aeabi_llsl
 #
 # Architecture dependencies
 #
@@ -165,6 +165,7 @@ $(obj)/lib1funcs.S: $(srctree)/arch/$(SRCARCH)/lib/lib1funcs.S
 
 # For __aeabi_llsl
 ashldi3 = $(obj)/ashldi3.o
+AFLAGS_ashldi3.o +=-Wa,-march=armv7-a$(plus_sec)
 
 $(obj)/ashldi3.S: $(srctree)/arch/$(SRCARCH)/lib/ashldi3.S
 	$(call cmd,shipped)
